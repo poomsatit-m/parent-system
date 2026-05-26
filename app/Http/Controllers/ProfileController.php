@@ -86,6 +86,6 @@ class ProfileController extends Controller
             'selected_student_profile' => $profile,
         ]);
 
-        return redirect()->route('students.dashboard');
+        return redirect()->route('students.profile');
     }
 }

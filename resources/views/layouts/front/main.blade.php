@@ -53,11 +53,17 @@
                 </div>
                 <ul class="pc-navbar">
                     <li class="pc-item pc-caption"><label>Menu</label></li>
-                    @if (session('studentdoce') != null)
+                    @if (session('selected_studentcode') != null)
                         <li class="pc-item">
-                            <a href="{{ route('school.dashboard') }}" class="pc-link">
-                                <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
-                                <span class="pc-mtext">Dashboard</span>
+                            <a href="{{ route('students.enrollments') }}" class="pc-link">
+                                <span class="pc-micon"><i class="ti ti-file-text "></i></span>
+                                <span class="pc-mtext">การลงทะเบียน</span>
+                            </a>
+                        </li>
+                         <li class="pc-item">
+                            <a href="{{ route('students.bills') }}" class="pc-link">
+                                <span class="pc-micon"><i class="ti ti-file-text"></i></span>
+                                <span class="pc-mtext">ใบแจ้งหนี้/ใบเสร็จรับเงิน</span>
                             </a>
                         </li>
 

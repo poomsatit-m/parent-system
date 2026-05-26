@@ -1,16 +1,16 @@
 @extends('layouts.front.main')
 
-@section('page-title', 'ข้อมูลนักศึกษา')
+@section('page-title', 'การลงทะเบียน')
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('select-student') }}">เลือกนักศึกษา</a></li>
-    <li class="breadcrumb-item active" aria-current="page">ข้อมูลนักศึกษา</li>
+    <li class="breadcrumb-item active" aria-current="page">การลงทะเบียน</li>
 @endsection
 
 @section('content')
 
 {{-- ===== Student Profile Card ===== --}}
-<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);">
+<div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #bbd3f3 0%, #67a1f8 50%);">
     <div class="card-body p-4 text-white">
         <div class="d-flex align-items-center gap-3">
             <div class="rounded-circle bg-white bg-opacity-25 d-flex align-items-center justify-content-center flex-shrink-0"

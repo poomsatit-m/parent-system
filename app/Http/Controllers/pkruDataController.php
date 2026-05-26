@@ -8,7 +8,25 @@ use Illuminate\Support\Facades\Http;
 
 class pkruDataController extends Controller
 {
-    public function studentDashboard()
+    public function studentprofile()
+    {
+         $studentcode = session('selected_studentcode');
+
+       // exit();
+
+        $response = Http::post('https://student.pkru.ac.th/api/getprofile', [
+            'STUDENTCODE' => $studentcode,
+        ]);
+
+        $data    = $response->successful() ? ($response->json('data') ?? []) : [];
+        $profile = $data[0] ?? [];
+
+        return view('students.profile', compact('profile'));
+
+
+       // return redirect()->route('students.enrollments');
+    }
+    public function studentenrollments()
     {
         $studentcode    = session('selected_studentcode');
         $studentProfile = session('selected_student_profile', []);
@@ -23,6 +41,6 @@ class pkruDataController extends Controller
             ->groupBy('fullacadyear')
             ->sortKeysDesc();
 
-        return view('students.dashboard', compact('studentProfile', 'enrollBySemester'));
+        return view('students.enrollments', compact('studentProfile', 'enrollBySemester'));
     }
 }

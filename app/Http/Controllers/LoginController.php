@@ -74,7 +74,7 @@ $citizenid = '3829800109835';
 
            // return redirect()->intended('/dashboard');
 
-            return redirect()->intended('/profile/main');
+            return redirect()->intended('/select-student');
 
     }
 }

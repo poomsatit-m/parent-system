@@ -28,7 +28,9 @@ Route::middleware('auth')->group(function () {
         ->prefix('students')
         ->name('students.')
         ->group(function () {
-            Route::get('/', [pkruData::class, 'studentDashboard'])->name('dashboard');
+             Route::get('/profile', [pkruData::class, 'studentprofile'])->name('profile');
+            Route::get('/enrollments', [pkruData::class, 'studentenrollments'])->name('enrollments');
+             Route::get('/bills', [pkruData::class, 'studentbills'])->name('bills');
 
 
         });
