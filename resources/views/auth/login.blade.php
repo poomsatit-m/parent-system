@@ -46,72 +46,50 @@
     <div class="auth-main">
         <div class="auth-wrapper v1">
             <div class="auth-form">
-                <div class="card my-5" style="border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
-                    <div class="card-body p-5">
-                        <div class="text-center mb-4">
-                            <h4 class="f-w-500 mb-2">เข้าสู่ระบบ</h4>
-                            <h5 class="f-w-500 text-muted mb-1">{{ config('app.name') }}</h5>
-                            <small class="text-muted d-block">สำหรับบุคลากรสำนักวิทยบริการและเทคโนโลยีสารสนเทศ</small>
+                <div class="card my-5">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <!-- <a href="#"><img src="{{ asset('front/assets/images/logo-dark.svg') }}" alt="img"></a> -->
+                            <div class="d-grid my-3">
+                                <h5 class="text-center f-w-500 mb-3">การเข้าใช้ระบบผ่าน ThaID</h5>
+                                <p style="font-size: 14px; color: red;">เข้าสู่ระบบด้วยบัญชี
+                                    ThaID ของคุณ</p>
+                                <a href="{{ route('auth.thaid.redirect') }}" class="btn btn-outline-primary">
+                                    <span>เข้าใช้งานด้วย ThaiD</span>
+                                </a>
+
+
+                            </div>
+                        </div>
+                        <div class="saprator my-3">
+                            <span>OR</span>
                         </div>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-                                @foreach ($errors->all() as $error)
-                                    <div>{{ $error }}</div>
-                                @endforeach
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('login.pkru') }}" class="space-y-4">
+                        <form method="POST" action="{{ route('login.pkru') }}" class="space-y-5">
                             @csrf
-
+                            <h5 class="text-center f-w-500 mb-3">สำหรับทดสอบของบุคลากร</h5>
                             <div class="form-group mb-3">
-                                <input type="text"
-                                    class="form-control @error('username') is-invalid @enderror"
-                                    name="username"
-                                    placeholder="Username"
-                                    value="{{ old('username') }}"
-                                    required>
-                                @error('username')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <input type="text" class="form-control" name="username" id="floatingInput"
+                                    placeholder="Username">
                             </div>
-
                             <div class="form-group mb-3">
-                                <input type="password"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    name="password"
-                                    placeholder="Password"
-                                    required>
-                                @error('password')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <input type="password" name="password" class="form-control" id="floatingInput1"
+                                    placeholder="Password">
                             </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex mt-1 justify-content-between align-items-center">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="customCheckc1" name="remember">
+                                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                                        checked="">
                                     <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
                                 </div>
-                            </div>
 
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-md">Login</button>
                             </div>
-
-                        </form>
-
-                        <div class="text-center mt-4">
-                            <small class="text-muted">@ {{ env('APP_NAMESUB') }}
-                                <span class="badge bg-light-success rounded-pill ms-2">{{ env('APP_VERSION') }}</span>
-                            </small>
-                            <div class="mt-2">
-                                <a href="https://www.pkru.ac.th" class="text-decoration-none text-primary small">มหาวิทยาลัยราชภัฏภูเก็ต</a>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Login</button>
                             </div>
-                        </div>
 
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -128,10 +106,6 @@
     <!-- Buy Now Link Script -->
     <script defer src="https://fomo.codedthemes.com/pixel/CDkpF1sQ8Tt5wpMZgqRvKpQiUhpWE3bc"></script>
 
-</body>
-<!-- [Body] end -->
-
-</html>
 
 
 

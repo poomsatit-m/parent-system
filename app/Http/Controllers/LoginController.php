@@ -29,52 +29,63 @@ class LoginController extends Controller
         $password = $request->input('password');
 
 
-            $AuthCode = '4AJD-BF86-AJGF-YD67-AKGF-6ABF-VEV2';
-            $RequestInfo = 'true';
+        //echo "Username: $username, Password: $password";
 
-            $response = Http::asForm()->post('https://data-service.pkru.ac.th/api/staff/auth/CallPassport', [
-                'user' => $username,
-                'password' => $password,
-                'authcode' => $AuthCode,
-                'RequestInfo' => $RequestInfo,
-            ]);
+        //exit();
 
-            // เช็กว่า response สำเร็จหรือไม่
-            $json = $response->json();
 
-            // ✅ ตรวจสอบว่า login ผ่านและมีข้อมูล
-            if (
-                !isset($json['status']) || $json['status'] != 200 ||
-                !isset($json['data'][0]) || $json['data'][0] !== true
-            ) {
-                return back()->withErrors(['username' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']);
-            }
+        $AuthCode = '4AJD-BF86-AJGF-YD67-AKGF-6ABF-VEV2';
+        $RequestInfo = 'true';
 
-            $staff = $json['data'];
+        $response = Http::asForm()->post('https://data-service.pkru.ac.th/api/staff/auth/CallPassport', [
+            'user' => $username,
+            'password' => $password,
+            'authcode' => $AuthCode,
+            'RequestInfo' => $RequestInfo,
+        ]);
 
-           // dd($staff);
+        // เช็กว่า response สำเร็จหรือไม่
+        $json = $response->json();
 
-            // รวมชื่อ-นามสกุลจาก array
-            // $staff[2] = คำนำหน้า, $staff[3] = ชื่อ, $staff[4] = นามสกุล
-            $fullName = ($staff[2] ?? '') . ($staff[3] ?? '') . ' ' . ($staff[4] ?? '');
+        //dd($json);
 
-$citizenid = '3829800109835';
-            $user = User::updateOrCreate(
-                ['citizenid' => $citizenid],
-                [
-                    'name' => trim($fullName) ?: $username,
-                    'email' => $username . '@pkru.ac.th',
-                    'password' => bcrypt($password),
-                    'citizenid' => $citizenid,
-                ]
+        // ✅ ตรวจสอบว่า login ผ่านและมีข้อมูล
+        if (
+            !isset($json['status']) || $json['status'] != 200 ||
+            !isset($json['data'][0]) || $json['data'][0] !== true
+        ) {
+            return back()->withErrors(['username' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']);
+        }
 
-            );
+        $staff = $json['data'];
 
-            Auth::login($user);
+        // dd($staff);
 
-           // return redirect()->intended('/dashboard');
+        // รวมชื่อ-นามสกุลจาก array
+        // $staff[2] = คำนำหน้า, $staff[3] = ชื่อ, $staff[4] = นามสกุล
+        $fullName = ($staff[2] ?? '') . ($staff[3] ?? '') . ' ' . ($staff[4] ?? '');
 
-            return redirect()->intended('/select-student');
+        $citizenid = '3830300065687';
+        $user = User::updateOrCreate(
+            ['citizenid' => $citizenid],
+            [
+                'name' => trim($fullName) ?: $username,
+               // 'email' => $username . '@pkru.ac.th',
+                'password' => bcrypt($password),
+                'citizenid' => $citizenid,
+            ]
 
+        );
+
+        Auth::login($user);
+       // echo "Login successful for user: authenticated with " . auth()->user()->name;
+
+      //  exit();
+
+        // return redirect()->intended('/dashboard');
+
+        //return redirect('/aaaa')->with('success', 'เข้าสู่ระบบสำเร็จ');
+
+        return redirect()->intended('/select-student');
     }
 }

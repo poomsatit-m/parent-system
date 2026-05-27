@@ -54,6 +54,12 @@
                 <ul class="pc-navbar">
                     <li class="pc-item pc-caption"><label>Menu</label></li>
                     @if (session('selected_studentcode') != null)
+                    <li class="pc-item">
+                            <a href="{{ route('students.profile') }}" class="pc-link">
+                                <span class="pc-micon"><i class="ti ti-user "></i></span>
+                                <span class="pc-mtext">ข้อมูลพื้นฐาน</span>
+                            </a>
+                        </li>
                         <li class="pc-item">
                             <a href="{{ route('students.enrollments') }}" class="pc-link">
                                 <span class="pc-micon"><i class="ti ti-file-text "></i></span>
@@ -61,7 +67,7 @@
                             </a>
                         </li>
                          <li class="pc-item">
-                            <a href="{{ route('students.bills') }}" class="pc-link">
+                            <a href="{{ route('students.vouchers') }}" class="pc-link">
                                 <span class="pc-micon"><i class="ti ti-file-text"></i></span>
                                 <span class="pc-mtext">ใบแจ้งหนี้/ใบเสร็จรับเงิน</span>
                             </a>

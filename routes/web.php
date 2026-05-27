@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController as Login;
 use App\Http\Controllers\pkruDataController as pkruData;
 use GuzzleHttp\Middleware;
+use App\Http\Controllers\Auth\ThaiDController as ThaiDController;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -30,10 +32,14 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
              Route::get('/profile', [pkruData::class, 'studentprofile'])->name('profile');
             Route::get('/enrollments', [pkruData::class, 'studentenrollments'])->name('enrollments');
-             Route::get('/bills', [pkruData::class, 'studentbills'])->name('bills');
+             Route::get('/studentvouchers', [pkruData::class, 'studentvouchers'])->name('vouchers');
 
 
         });
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/auth/thaid/redirect', [ThaiDController::class, 'redirect'])->name('auth.thaid.redirect');
+Route::get('/thaiD/Auth', [ThaiDController::class, 'callback'])->name('auth.thaid.callback');
+

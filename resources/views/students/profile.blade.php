@@ -52,7 +52,7 @@
                                 <a href="{{ route('students.enrollments') }}" class="btn btn-sm btn-light">
                                     <i class="fas fa-file-alt me-1"></i>ดูการลงทะเบียน
                                 </a>
-                                <a href="{{ route('students.bills') }}" class="btn btn-sm btn-light">
+                                <a href="{{ route('students.vouchers') }}" class="btn btn-sm btn-light">
                                     <i class="fas fa-file-invoice-dollar me-1"></i>ดูใบแจ้งหนี้/ใบเสร็จ
                                 </a>
                             </div>

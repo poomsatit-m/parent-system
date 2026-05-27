@@ -43,4 +43,25 @@ class pkruDataController extends Controller
 
         return view('students.enrollments', compact('studentProfile', 'enrollBySemester'));
     }
+
+    public function studentvouchers()
+    {
+        $studentcode    = session('selected_studentcode');
+        $studentProfile = session('selected_student_profile', []);
+
+        $studentid = $studentProfile['studentid'] ?? null;
+
+       // $studentid = '1236608';
+
+        $response = Http::post('https://student.pkru.ac.th/api/getvoucher', [
+
+            'studentid' => $studentid,
+        ]);
+
+        $vouchers = $response->successful() ? ($response->json('data') ?? []) : [];
+
+        $vouchersBySemester = collect($vouchers)->sortByDesc('fullacadyear');
+
+        return view('students.vouchers', compact('studentProfile', 'vouchersBySemester'));
+    }
 }

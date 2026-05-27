@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'thaid' => [
+        'base_url'      => env('THAID_BASE_URL'),
+        'api_key'       => env('THAID_API_KEY'),
+        'client_id'     => env('THAID_CLIENT_ID'),
+        'client_secret' => env('THAID_CLIENT_SECRET'),
+        'redirect_uri'  => env('THAID_REDIRECT_URI'),
+    ],
+
 ];

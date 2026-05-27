@@ -71,6 +71,15 @@ class ProfileController extends Controller
 
         session(['students_list' => $students]);
 
+        if (count($students) === 1) {
+            $studentCode = $students[0]['studentcode'] ?? null;
+            if ($studentCode) {
+                return redirect()->route('profile.student', ['studentId' => $studentCode]);
+            }
+        }
+
+
+
         return view('profile.select-student', compact('students'));
     }
 
